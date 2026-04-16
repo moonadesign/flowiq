@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowIQ v2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=DM+Sans:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="minterface.css" layer="minterface" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script crossorigin="anonymous" defer src="https://kit.fontawesome.com/46660cdeff.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise@35.2.0/dist/ag-grid-enterprise.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/prism.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-json.min.js"></script>
+    <script defer src="scripts.js"></script>
+    <script defer src="test.js"></script>
+  </head>
+  <body class="app">
+    <header id="top">
+      <a class="brand" href="/"><strong>FlowIQ</strong></a>
+      <nav id="nav">
+        <button class="button active" data-view="pumps"><i class="fa-regular fa-pump"></i><span>Pumps</span></button>
+        <button class="button" data-view="curves"><i class="fa-regular fa-wave-sine"></i><span>Curves</span></button>
+        <button class="button" data-view="more"><i class="fa-regular fa-ellipsis"></i><span>More</span></button>
+      </nav>
+      <div class="fill"></div>
+      <div class="row tight" id="top-icons">
+        <button class="button button-icon" id="prod-toggle" title="Toggle production UI" type="button"><i class="fa-regular fa-sidebar"></i></button>
+        <button class="button button-icon" id="mode"><i class="fa-solid fa-circle-half-stroke"></i></button>
+        <button class="button button-icon" id="data-btn" type="button"><i class="fa-regular fa-gear"></i></button>
+      </div>
+      <button class="button" hidden id="reset-btn"><i class="fa-regular fa-arrow-rotate-left"></i> Reset</button>
+      <button class="button primary" id="generate-btn"><i class="fa-regular fa-sparkles"></i> Generate</button>
+    </header>
+    <header hidden id="top-prod">
+      <input id="prod-search" placeholder="Search pumps, curves, parts…" type="search" />
+      <div class="fill"></div>
+      <button class="button button-icon" type="button"><i class="fa-regular fa-bell"></i></button>
+      <button class="button button-icon" type="button"><i class="fa-regular fa-circle-question"></i></button>
+      <div class="avatar">MB</div>
+    </header>
+    <div id="page">
+      <div class="bar">
+        <nav class="tab-bar line">
+          <button class="button tab active" id="preset"></button>
+        </nav>
+        <div class="fill"></div>
+        <button class="button outline" id="filter-btn"><i class="fa-regular fa-bars-filter"></i> Filter</button>
+        <button class="button outline" id="columns-btn"><i class="fa-regular fa-table-columns"></i> Columns</button>
+        <div id="grid-menu"></div>
+        <button class="button primary" id="new-btn"></button>
+      </div>
+      <div id="grid"></div>
+      <div id="more-page"></div>
+    </div>
+    <template id="pump-footer-template">
+      <div class="footer-bar">
+        <button class="button outline" data-action="view-curve" type="button">View curve</button>
+        <button class="button primary" data-action="save" disabled id="save-pump" type="button">Save pump</button>
+      </div>
+    </template>
+    <template id="legend-item-template">
+      <button aria-pressed="true" class="legend-item" type="button">
+        <span class="legend-swatch"></span>
+        <span data-slot="label"></span>
+      </button>
+    </template>
+    <template id="sub-grid-section-template">
+      <div class="nav-section">
+        <div class="nav-section-header">
+          <h4 data-slot="title"></h4>
+          <i class="fa-regular fa-chevron-right"></i>
+          <div class="fill"></div>
+          <button class="button outline" data-action="filter" type="button"><i class="fa-regular fa-bars-filter"></i> Filter</button>
+          <button class="button outline" data-action="columns" type="button"><i class="fa-regular fa-table-columns"></i> Columns</button>
+          <button class="button primary" data-action="new" data-slot="new-label" type="button"></button>
+        </div>
+        <div class="nav-section-content">
+          <div data-slot="grid"></div>
+        </div>
+      </div>
+    </template>
+    <template id="section-template">
+      <div class="nav-section">
+        <div class="nav-section-header">
+          <h4 data-slot="title"></h4>
+          <i class="fa-regular fa-chevron-right"></i>
+          <div class="fill"></div>
+        </div>
+        <div class="nav-section-content" data-slot="content"></div>
+      </div>
+    </template>
+    <template id="sharing-banner-template">
+      <div class="banner">
+        <strong data-slot="headline"></strong>
+        <div class="muted" data-slot="description"></div>
+        <div class="row tight" data-slot="links"></div>
+      </div>
+    </template>
+    <template id="section-menu-template">
+      <div class="menu-wrap">
+        <button class="button button-icon outline" type="button"><i class="fa-regular fa-ellipsis"></i></button>
+        <div class="menu">
+          <button class="menu-item" data-action="import" type="button"><i class="fa-regular fa-upload"></i> Import</button>
+          <button class="menu-item" data-action="paste" type="button"><i class="fa-regular fa-clipboard"></i> Paste values</button>
+          <button class="menu-item" data-action="export" type="button"><i class="fa-regular fa-file-csv"></i> Export</button>
+          <hr />
+          <button class="menu-item" data-action="columns" type="button"><i class="fa-regular fa-table-columns"></i> Columns</button>
+          <hr />
+          <button class="menu-item" data-action="undo" type="button"><i class="fa-regular fa-arrow-rotate-left"></i> Undo</button>
+          <button class="menu-item" data-action="redo" type="button"><i class="fa-regular fa-arrow-rotate-right"></i> Redo</button>
+        </div>
+      </div>
+    </template>
+    <dialog id="data-dialog">
+      <header class="bar">
+        <h3>Raw data</h3>
+        <div class="fill"></div>
+        <button class="button outline" id="data-copy" type="button"><i class="fa-regular fa-copy"></i> Copy to clipboard</button>
+        <button class="button button-icon" id="data-close" type="button"><i class="fa-regular fa-xmark"></i></button>
+      </header>
+      <pre id="data-content"><code class="language-json"></code></pre>
+    </dialog>
+    <dialog id="generate-dialog">
+      <header class="bar">
+        <h3>Generate catalog data</h3>
+        <div class="fill"></div>
+        <button class="button button-icon" id="gen-close" type="button"><i class="fa-regular fa-xmark"></i></button>
+      </header>
+      <div class="range-grid">
+        <div class="field">
+          <label>Pumps</label>
+          <input id="gen-pump-count" max="50" min="1" step="1" type="number" value="10" />
+        </div>
+        <div class="field">
+          <label>Curves</label>
+          <input id="gen-curve-count" max="30" min="1" step="1" type="number" value="5" />
+        </div>
+        <div class="field">
+          <label>Model</label>
+          <select id="gen-model">
+            <option value="gpt-4.1">gpt-4.1</option>
+            <option selected value="gpt-4.1-mini">gpt-4.1-mini</option>
+            <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+            <option value="gpt-5">gpt-5</option>
+            <option value="gpt-5-mini">gpt-5-mini</option>
+            <option value="gpt-5-nano">gpt-5-nano</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Source</label>
+          <select id="gen-source"></select>
+        </div>
+      </div>
+      <textarea id="gen-prompt"></textarea>
+      <div class="footer-bar">
+        <button class="button outline" id="gen-cancel" type="button">Cancel</button>
+        <button class="button primary" id="gen-go" type="button">Generate</button>
+      </div>
+    </dialog>
+    <button class="button button-icon" id="test-toggle" type="button"><i class="fa-solid fa-robot"></i></button>
+    <div hidden id="test-panel">
+      <header class="bar">
+        <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <strong>Flo</strong>
+          <div class="muted">Your FlowIQ guide</div>
+        </div>
+        <div class="fill"></div>
+        <button class="button button-icon" id="test-close" type="button"><i class="fa-regular fa-xmark"></i></button>
+      </header>
+      <div id="test-greeting">Hi! I can walk you through tasks — pick one below or ask me anything.</div>
+      <div class="row tight" id="test-pills"></div>
+      <div id="test-log"></div>
+      <button class="button outline" hidden id="test-stop" type="button"><i class="fa-regular fa-stop"></i> Stop</button>
+      <form class="test-input-bar" id="test-form">
+        <input autocomplete="off" id="test-input" placeholder="Ask anything…" type="text" />
+        <button class="button button-icon primary" id="test-send" type="submit"><i class="fa-regular fa-arrow-up"></i></button>
+      </form>
+    </div>
+    <aside id="drawer">
+      <header class="bar">
+        <h3 id="drawer-title"></h3>
+        <div class="fill"></div>
+        <button class="button button-icon" id="drawer-close" type="button"><i class="fa-regular fa-xmark"></i></button>
+      </header>
+      <div id="drawer-body"></div>
+    </aside>
+  </body>
+</html>

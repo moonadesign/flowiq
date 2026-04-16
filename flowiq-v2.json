@@ -1,0 +1,206 @@
+{
+  "fixtures": {
+    "curveFamilies": [
+      { "description": "Reference end-suction demonstration curves.", "id": "end-suction-demo", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "End Suction Demo" }
+    ],
+    "curves": [
+      {
+        "description": "End-suction reference curve, 3550 RPM, medium-flow service.",
+        "family": "end-suction-demo",
+        "fitStatus": "fitted",
+        "id": "150IEQ-01-demo",
+        "impeller": "1 eye",
+        "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" },
+        "motor": "2 poles, 60.00Hz, 3550.00 RPM",
+        "range": { "increment": 5, "max": 200, "min": 130 },
+        "rpm": 3550,
+        "serviceFactor": 1.15,
+        "speedRange": "500.00 - 3600.00 RPM",
+        "status": "published",
+        "strategy": "round-up",
+        "trims": [
+          {
+            "diameter": 150,
+            "fitStatus": "fitted",
+            "id": "150",
+            "impellerId": "IMP-150IEQ-150",
+            "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" },
+            "points": [
+              { "efficiency": 0.42, "flow": 0, "head": 36.0, "id": "p-0", "npshr": 1.8, "power": 4.1 },
+              { "efficiency": 0.61, "flow": 50, "head": 34.5, "id": "p-1", "npshr": 2.0, "power": 5.0 },
+              { "efficiency": 0.74, "flow": 100, "head": 31.2, "id": "p-2", "npshr": 2.4, "power": 5.8 },
+              { "efficiency": 0.78, "flow": 150, "head": 26.4, "id": "p-3", "npshr": 3.1, "power": 6.4 },
+              { "efficiency": 0.71, "flow": 200, "head": 19.6, "id": "p-4", "npshr": 4.2, "power": 6.9 }
+            ],
+            "status": "published"
+          }
+        ]
+      }
+    ],
+    "fitStatuses": [
+      { "description": "Data points have been fitted with polynomials or splines.", "id": "fitted", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Fitted" },
+      { "description": "Fit produced questionable results — manual review recommended.", "id": "needs-review", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Needs review" },
+      { "description": "Raw lab measurements, not yet fitted.", "id": "raw", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Raw" }
+    ],
+    "productLines": [
+      { "description": "Acme end-suction centrifugal pumps.", "id": "ACME-ES", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Acme End Suction" }
+    ],
+    "pumps": {
+      "items": [
+        { "curveId": "150IEQ-01-demo", "cutwaterDiameter": 200, "description": "End-suction single-stage, cast iron.", "dischargeNozzle": "1.5\"", "id": "acme-es-1x1.5-6", "impellerId": "IMP-150IEQ-175", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "productLine": "ACME-ES", "rpmRange": { "max": 1800, "min": 1500 }, "shaftPower": 7.5, "sizeName": "1x1.5-6", "solidsLimit": 3, "stages": { "max": 1, "min": 1 }, "status": "published", "suctionNozzle": "1\"", "type": "end-suction", "vfdLimit": 60 }
+      ],
+      "legacy": {
+        "adminProps": ["curveId", "impellerId", "size", "status", "syncSpeed", "testSpeed", "type"],
+        "clientProps": ["curveNumber", "diameterRange", "diameterRated", "productFamily", "size", "speed", "speedRange", "stages"]
+      }
+    },
+    "pumpTypes": [
+      { "description": "ANSI/ISO end suction centrifugal pumps.", "id": "end-suction", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "End Suction" },
+      { "description": "Stacked-impeller high-head pumps.", "id": "multi-stage", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Multi-Stage" },
+      { "description": "Submersible service pumps.", "id": "submersible", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Submersible" },
+      { "description": "Vertical inline pumps for HVAC and commercial water.", "id": "vertical-inline", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Vertical Inline" }
+    ],
+    "sources": [
+      { "name": "Bell & Gossett", "selector": "https://www.esp-systemwize.com", "url": "https://www.xylem.com/en-us/brands/bell-gossett/bell--gossett-products/pumps-circulators/" },
+      { "name": "Grundfos", "url": "https://product-selection.grundfos.com/us/categories/pumps" }
+    ],
+    "statuses": [
+      { "description": "Work in progress, not yet published.", "id": "draft", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Draft" },
+      { "description": "Live and visible to clients.", "id": "published", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Published" },
+      { "description": "Retired from active use.", "id": "archived", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Archived" }
+    ],
+    "strategies": [
+      { "description": "Round generated variants up to the nearest increment.", "id": "round-up", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Round up" },
+      { "description": "Round generated variants down to the nearest increment.", "id": "round-down", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Round down" },
+      { "description": "Round generated variants to the nearest increment in either direction.", "id": "round-nearest", "meta": { "createdAt": "2026-01-15T10:00:00Z", "modifiedAt": "2026-04-17T14:00:00Z", "modifiedBy": "admin", "owner": "admin" }, "name": "Round nearest" }
+    ],
+    "tests": [
+      {
+        "description": "End-to-end flow for creating a pump size in an existing product line.",
+        "name": "Add a new pump",
+        "steps": [
+          { "action": { "selector": "[data-view='pumps']", "type": "click" }, "narrate": "First let's make sure we're on the Pumps view." },
+          { "action": { "selector": "#new-btn", "type": "click" }, "narrate": "Click the New Pump button to open a blank form." },
+          { "action": { "selector": "[data-field='productLine']", "type": "select", "value": "ACME-ES" }, "narrate": "Pick a product line. We'll use Acme End Suction." },
+          { "action": { "selector": "[data-field='type']", "type": "select", "value": "end-suction" }, "narrate": "Choose the pump type — this one is end suction." },
+          { "action": { "selector": "[data-field='sizeName']", "type": "fill", "value": "1x1.5-6" }, "narrate": "Enter the size name using the standard convention." },
+          { "action": { "selector": "[data-field='curveId']", "type": "select", "value": "150IEQ-01-demo" }, "narrate": "Pick the assigned performance curve." },
+          { "action": { "selector": "[data-field='description']", "type": "fill", "value": "End-suction single-stage reference pump." }, "narrate": "Add a catalog description." },
+          { "action": { "selector": "#save-pump", "type": "click" }, "narrate": "Finally, save the pump." }
+        ]
+      },
+      {
+        "description": "Review a curve's sharing impact before editing its data.",
+        "name": "Review a shared curve",
+        "steps": [
+          { "action": { "selector": "[data-view='curves']", "type": "click" }, "narrate": "Switch to the Curves view." },
+          { "action": { "selector": ".detail-link", "type": "click" }, "narrate": "Open the first curve's detail drawer." },
+          { "action": { "selector": "#drawer .banner", "type": "highlight" }, "narrate": "The sharing banner tells you which pump sizes reference this curve, so you know the blast radius before editing." },
+          { "action": { "selector": "#drawer [data-section='visualization']", "type": "highlight" }, "narrate": "The visualization plots head-flow for every trim diameter." },
+          { "action": { "selector": "#drawer [data-section='performance-data']", "type": "highlight" }, "narrate": "Performance data holds each trim's measured flow, head, efficiency, NPSH, and power points." },
+          { "action": { "selector": "#drawer [data-section='motor-impeller']", "type": "highlight" }, "narrate": "Motor and impeller sets the diameter envelope that drives catalog variants." },
+          { "action": { "selector": "#drawer .banner .button-link", "type": "highlight" }, "narrate": "Each linked pump size in the banner is clickable — let's jump straight to one." },
+          { "action": { "selector": "#drawer .banner .button-link", "type": "click" }, "narrate": "Clicking opens that pump's detail drawer directly." }
+        ]
+      }
+    ]
+  },
+  "types": {
+    "curve": {
+      "description": { "hide": true, "type": "string" },
+      "family": "<curveFamilyId>",
+      "fitStatus": { "hide": true, "type": "<fitStatusId>" },
+      "id": "string",
+      "impeller": { "hide": true, "type": "string" },
+      "meta": "<meta>",
+      "motor": { "hide": true, "type": "string" },
+      "range": { "hide": true, "increment": "number", "max": "number", "min": "number" },
+      "rpm": "number",
+      "serviceFactor": { "hide": true, "type": "number" },
+      "speedRange": { "hide": true, "type": "string" },
+      "status": "<statusId>",
+      "strategy": { "hide": true, "type": "<strategyId>" },
+      "trims": ["<trimId>"]
+    },
+    "curveFamily": {
+      "compliance": { "hide": true, "type": "string" },
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "fitStatus": {
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "meta": {
+      "createdAt": "date",
+      "hide": true,
+      "modifiedAt": "date",
+      "modifiedBy": "<ownerId>",
+      "owner": "<ownerId>"
+    },
+    "point": {
+      "efficiency": "number",
+      "flow": "number",
+      "head": "number",
+      "id": { "hide": true, "type": "string" },
+      "npshr": "number",
+      "power": "number"
+    },
+    "productLine": {
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "pump": {
+      "curveId": "<curveId>",
+      "cutwaterDiameter": { "hide": true, "type": "number" },
+      "description": { "hide": true, "type": "string" },
+      "dischargeNozzle": { "hide": true, "type": "string" },
+      "id": "string",
+      "impellerId": { "hide": true, "type": "<impellerId>" },
+      "meta": "<meta>",
+      "productLine": "<productLineId>",
+      "rpmRange": { "hide": true, "max": "number", "min": "number" },
+      "shaftPower": { "hide": true, "type": "number" },
+      "sizeName": { "hide": true, "type": "string" },
+      "solidsLimit": { "hide": true, "type": "number" },
+      "stages": { "hide": true, "max": "number", "min": "number" },
+      "status": "<statusId>",
+      "suctionNozzle": { "hide": true, "type": "string" },
+      "type": "<pumpTypeId>",
+      "vfdLimit": { "hide": true, "type": "number" }
+    },
+    "pumpType": {
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "status": {
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "strategy": {
+      "description": "string",
+      "id": "string",
+      "meta": "<meta>",
+      "name": "string"
+    },
+    "trim": {
+      "diameter": "number",
+      "fitStatus": "<fitStatusId>",
+      "id": "string",
+      "impellerId": "string",
+      "meta": "<meta>",
+      "points": ["<pointId>"],
+      "status": "<statusId>"
+    }
+  }
+}

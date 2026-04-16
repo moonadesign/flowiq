@@ -1,0 +1,15 @@
+{
+  "types": {
+    "product": {
+      "compliance": "string",
+      "createdAt": "date",
+      "description": "string",
+      "id": "string",
+      "modifiedAt": "date",
+      "name": "string",
+      "ownerId": "<ownerId>",
+      "status": ["active", "archived", "draft"],
+      "tags": ["<tagId>"]
+    }
+  }
+}

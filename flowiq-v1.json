@@ -1,0 +1,126 @@
+{
+  "types": {
+    "curve": {
+      "id": "string",
+      "properties": ["<propertyName>"],
+      "sizes": ["<sizeId>"],
+      "trims": ["<trimId>"]
+    },
+    "curveFamily": {
+      "archived": "boolean",
+      "compliance": "string",
+      "createdAt": "date",
+      "curves": ["<curveId>"],
+      "description": "string",
+      "id": "string",
+      "modifiedAt": "date",
+      "name": "string",
+      "ownerId": "<ownerId>",
+      "status": ["active", "archived", "draft"],
+      "tags": ["<tagId>"],
+      "type": ["<curveFamilyType>"]
+    },
+    "diameterRangeSpec": {
+      "properties": ["<propertyName>"]
+    },
+    "point": {
+      "id": "string",
+      "properties": ["<propertyName>"]
+    },
+    "pump": {
+      "id": "string",
+      "properties": ["<propertyName>"],
+      "sizes": ["<sizeId>"]
+    },
+    "size": {
+      "id": "string",
+      "properties": ["<propertyName>"]
+    },
+    "trim": {
+      "id": "string",
+      "points": ["<pointId>"],
+      "properties": ["<propertyName>"]
+    }
+  },
+  "fixtures": {
+    "curveFamilies": [
+      {
+        "curves": [
+          {
+            "diameterRangeSpec": {
+              "properties": [
+                "batchSize",
+                "expectedVariants",
+                "impactAssessment",
+                "incrementMm",
+                "maxDiameterMm",
+                "memoryUsage",
+                "minDiameterMm",
+                "processingTime",
+                "rangeSpanMm",
+                "validationError",
+                "validationStatus"
+              ]
+            },
+            "id": "150IEQ-01",
+            "properties": [
+              "description",
+              "fitStatus",
+              "impeller",
+              "motor",
+              "rpm",
+              "serviceFactor",
+              "speedRange",
+              "status",
+              "strategy",
+              "tags"
+            ],
+            "trims": [
+              {
+                "id": "150mm",
+                "points": [
+                  {
+                    "id": "point-1",
+                    "properties": [
+                      "efficiency",
+                      "flow",
+                      "head",
+                      "npshr",
+                      "power"
+                    ]
+                  }
+                ],
+                "properties": [
+                  "diameterMm",
+                  "fitStatus",
+                  "impellerId",
+                  "status"
+                ]
+              }
+            ]
+          }
+        ],
+        "id": "end-suction-demo",
+        "name": "End Suction Demo"
+      }
+    ],
+    "products": [
+      {
+        "id": "acme-end-suction",
+        "name": "Acme End Suction",
+        "pumps": [
+          {
+            "id": "acme-es-standard",
+            "name": "Acme ES Standard",
+            "sizes": [
+              {
+                "curveId": "150IEQ-01",
+                "id": "1x1.5-6"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
